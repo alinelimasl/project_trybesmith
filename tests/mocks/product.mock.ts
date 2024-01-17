@@ -1,11 +1,11 @@
 import { Product } from '../../src/types/Product';
 
-// const emptyNameProduct: Product = {
-//     id: 1,
-//     name: '',
-//     price: '10 peças de ouro',
-//     orderId: 1,       
-// };
+const emptyNameProduct: Product = {
+    id: 1,
+    name: '',
+    price: '10 peças de ouro',
+    orderId: 1,       
+};
 
 const validProduct: Product = {
     id: 1,
@@ -25,7 +25,7 @@ const validProduct: Product = {
 //   ];
   
   export default {
-    // emptyNameProduct,
+    emptyNameProduct,
     validProduct,
   }
   

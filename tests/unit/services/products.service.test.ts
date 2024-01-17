@@ -6,16 +6,17 @@ import productService from '../../../src/services/product.service';
 
 describe('ProductsService', function () {
   beforeEach(function () { sinon.restore(); });
-// //arrange
+  it('Deve retornar com status 201 com o produto cadastrado'), async function () {
+//arrange
 
-// const productMockReturn = ProductModel.build(productMock.validProduct);
-// sinon.stub(ProductModel, 'create').resolves(productMockReturn);
+const productMockReturn = ProductModel.build(productMock.validProduct);
+sinon.stub(ProductModel, 'create').resolves(productMockReturn);
 
-// //act
+//act
 
-// const serviceResponse = productService.create(productMock.validProduct);
+const serviceResponse = await productService.create(productMock.validProduct);
 
-// //assert
-// expect(serviceResponse.status).to.be.equal('SUCCESSFUL');
-// expect(serviceResponse.data).to.be.equal(productMock.validProduct);
-});
+//assert
+expect(serviceResponse.status).to.be.equal('SUCCESSFUL');
+expect(serviceResponse.data).to.be.deep.equal(productMock.validProduct);
+}});
