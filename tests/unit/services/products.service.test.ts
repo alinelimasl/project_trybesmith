@@ -19,4 +19,18 @@ const serviceResponse = await productService.create(productMock.validProduct);
 //assert
 expect(serviceResponse.status).to.be.equal('SUCCESSFUL');
 expect(serviceResponse.data).to.be.deep.equal(productMock.validProduct);
-}});
+}
+it('Deve retornar com status 400 sem o nome corretamente'), async function () {
+//arrange
+const productMockReturn = ProductModel.build(productMock.emptyNameProduct);
+sinon.stub(ProductModel, 'create').resolves(productMockReturn);
+
+//act
+const serviceResponse = await productService.create(productMock.emptyNameProduct);
+
+//assert
+expect(serviceResponse.status).to.be.equal('INVALID_DATA');
+expect(serviceResponse.data).to.be.deep.equal({ message: 'Nome inválido' });
+}
+
+});

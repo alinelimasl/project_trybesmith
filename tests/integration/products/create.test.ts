@@ -28,4 +28,24 @@ it('Deve retornar um status 201 com um produto criado', async function() {
   expect(httpResponse.status).to.be.equal(201);
   expect(httpResponse.body).to.be.deep.equal(productMock.validProduct);
 })
+
+it('Deve retornar um status 400 com um nome inválido', async function() {
+ 
+  //arrange
+
+  const mockCreateProduct = ProductModel.build(productMock.emptyNameProduct);
+  sinon.stub(ProductModel, 'create').resolves(mockCreateProduct);
+  
+  //act
+
+  const httpResponse = await chai
+  .request(app)
+  .post('/products')
+  .send(productMock.emptyNameProduct);
+
+  //assert
+
+  expect(httpResponse.status).to.be.equal(400);
+  expect(httpResponse.body).to.be.deep.equal({ message: 'Nome inválido' });
+})
 });
