@@ -14,6 +14,20 @@ const validProduct: Product = {
     orderId: 1,       
 };
 
+const invalidPriceProduct: Product = {
+  id: 1,
+  name: 'Excalibur',
+  price: '',
+  orderId: 1,       
+};
+
+const withoutOrderIdProduct: Product = {
+  id: 1,
+  name: 'Excalibur',
+  price: '10 peças de ouro',
+  orderId: 100000000,       
+};
+
 
 // const productMock = [
 //     { id: '1', name: 'Excalibur', price: '10 peças de ouro', orderId: '1' },
@@ -27,5 +41,7 @@ const validProduct: Product = {
   export default {
     emptyNameProduct,
     validProduct,
+    invalidPriceProduct,
+    withoutOrderIdProduct
   }
   

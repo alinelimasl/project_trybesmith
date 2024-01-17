@@ -32,7 +32,7 @@ describe('ProductsController', function () {
     expect(res.json).to.have.been.calledWith(productMock.validProduct);
   });
 
-  it('deve retornar um erro se enviar um nome inválido', async function (): Promise<void> {
+  it('deve retornar um erro se enviar um nome inválido', async function () {
 
     //arrange
     req.body = productMock.emptyNameProduct;
@@ -46,4 +46,48 @@ describe('ProductsController', function () {
     expect(res.json).to.have.been.calledWith({ message: 'Nome inválido' });
 
   });
+
+  it('deve retornar um erro se enviar um preço inválido', async function () {
+      
+      //arrange
+      req.body = productMock.invalidPriceProduct;
+      sinon.stub(productService, 'create').resolves({ status: 'INVALID_DATA', data: { message: 'Preço inválido' } });
+  
+      //act
+      await productsController.create(req, res);
+  
+      //assert
+      expect(res.status).to.have.been.calledWith(400);
+      expect(res.json).to.have.been.calledWith({ message: 'Preço inválido' });
+  
+    });
+
+    it('deve retornar um erro se enviar um orderId inválido', async function () {
+        
+        //arrange
+        req.body = productMock.withoutOrderIdProduct;
+        sinon.stub(productService, 'create').resolves({ status: 'INVALID_DATA', data: { message: 'OrderId inválido' } });
+    
+        //act
+        await productsController.create(req, res);
+    
+        //assert
+        expect(res.status).to.have.been.calledWith(400);
+        expect(res.json).to.have.been.calledWith({ message: 'OrderId inválido' });
+    
+      });
+
+      it('Deve retornar todos os produtos', async function () {
+        
+        //arrange
+        sinon.stub(productService, 'list').resolves({ status: 'SUCCESSFUL', data: [productMock.validProduct] });
+        
+        //act
+        await productsController.list(req, res);
+        
+        //assert
+        expect(res.status).to.have.been.calledWith(200);
+        expect(res.json).to.have.been.calledWith([productMock.validProduct]);
+      });
+
 });
