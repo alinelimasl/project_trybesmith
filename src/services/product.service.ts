@@ -12,6 +12,19 @@ async function create(product: ProductInputtableTypes): Promise<ServiceResponse<
   return { status: 'SUCCESSFUL', data: createdProduct.dataValues };
 }
 
+async function list(): Promise<ServiceResponse<Product[]>> {
+  const productsList = await ProductModel.findAll();
+
+  if (!productsList) {
+    return { status: 'INVALID_DATA', data: { message: 'Erro ao listar' } };
+  }
+
+  const productListData = productsList.map((product) => product.dataValues);
+
+  return { status: 'SUCCESSFUL', data: productListData };
+}
+
 export default {
   create,
+  list,
 };
