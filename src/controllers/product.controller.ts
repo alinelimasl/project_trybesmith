@@ -13,7 +13,7 @@ async function create(req: Request, res: Response) {
   return res.status(201).json(serviceResponse.data);
 }
 
-async function list(req: Request, res: Response) {
+async function list(_req: Request, res: Response) {
   const serviceResponse = await productService.list();
         
   if (serviceResponse.status !== 'SUCCESSFUL') {

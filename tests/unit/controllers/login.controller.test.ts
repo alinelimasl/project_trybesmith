@@ -43,4 +43,5 @@ describe('LoginController', function () {
     expect(res.status).to.have.been.calledWith(400);
     expect(res.json).to.have.been.calledWith({ message: 'Nome inválido' });
   });
+
 }); 
